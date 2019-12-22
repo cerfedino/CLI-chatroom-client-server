@@ -9,7 +9,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <stdbool.h>
-//Test2
+
 #define PORT 4444
 struct termios orig_termios;
 void set_conio_terminal_mode();
