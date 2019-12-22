@@ -12,7 +12,6 @@
 
 #define PORT 4444
 struct termios orig_termios;
-//Test
 void set_conio_terminal_mode();
 int getch();
 void reset_terminal_mode();
@@ -67,7 +66,7 @@ int main(){
 			select(1, &fds, NULL, NULL, NULL);
 			
 			int intTyped=getch();
-   			char charTyped=intTyped; // consume the character
+   			char charTyped=intTyped;
 			
 			if(intTyped==13){
 				send(clientSocket, buffer, strlen(buffer)+1, 0);
