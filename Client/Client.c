@@ -8,6 +8,7 @@
 #include <termios.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <stdbool.h>
 
 #define PORT 4444
 struct termios orig_termios;
@@ -70,11 +71,11 @@ int main(){
 			
 			if(intTyped==13){
 				send(clientSocket, buffer, strlen(buffer)+1, 0);
-				/*if(strcmp(buffer, ":exit")){
+				if(strcmp(buffer, ":exit")==true){
 					close(clientSocket);
 					printf("[-]Disconnected from server.\n\r");
 					exit(1);
-				}*/
+				}
 				memset(buffer,0, sizeof(buffer));
 				
 			}

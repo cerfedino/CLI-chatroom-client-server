@@ -112,7 +112,7 @@ void *perform_work(void *arguments){
 			else{
 				printf("Messaggio da [%s:%d (%s)] = '%s' - Faccio il broadcast...\n", address,port, name,buffer);
 				
-				snprintf(message,sizeof(message),"%s:%d (%s) : %s\n", address,port, name,buffer);
+				snprintf(message,sizeof(message),"%s:%d (%s) : %s", address,port, name,buffer);
 
 				MessBroadcast(message);
 			}
