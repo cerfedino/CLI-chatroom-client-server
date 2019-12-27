@@ -9,20 +9,24 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <stdbool.h>
+#include <pthread.h>
 
 #define PORT 4444
 struct termios orig_termios;
 void set_conio_terminal_mode();
 int getch();
 void reset_terminal_mode();
-int kbhit();
 void append(char* s, char c);
+pthread_t serverThread;
+int clientSocket;
 
+void *ServerThread_work(void *arguments);
+pthread_create(pthread_t *thread, const pthread_attr_t *attr,void *(*start_routine) (void *), void *arg);
 int main(){
 	set_conio_terminal_mode();
 	pid_t childpid;
 
-	int clientSocket, ret;
+	int ret;
 	struct sockaddr_in serverAddr;
 	char buffer[100];
 	char message[200];
@@ -46,45 +50,41 @@ int main(){
 	}
 	printf("[+]Connected to Server.\n\r");
 
-	childpid = fork();
-	
-	if(childpid==0){
-		while (1){
-			if(recv(clientSocket, message, 200, 0) < 0){
-				printf("[-]Error in receiving data.\n\r");
-		 	}else{
-				printf("%s\n\r", message);
-			}
-		}
+
+	if(pthread_create(&serverThread, NULL, &ServerThread_work, NULL)==0){
+		printf("[+] Thread created succesfully\n");
 	}
 	else{
-		memset(buffer,0, sizeof(buffer));
-		while (1){
-			fd_set fds;
-    		FD_ZERO(&fds);
-    		FD_SET(0, &fds);
-			select(1, &fds, NULL, NULL, NULL);
+		printf("[-] Error in creating thread");
+	}
+
+	
+	memset(buffer,0, sizeof(buffer));		
+	while (1){
+		fd_set fds;
+    	FD_ZERO(&fds);
+    	FD_SET(0, &fds);
+		select(1, &fds, NULL, NULL, NULL);
 			
-			int intTyped=getch();
-   			char charTyped=intTyped;
+		int intTyped=getch();
+   		char charTyped=intTyped;
 			
-			if(intTyped==13){
-				send(clientSocket, buffer, strlen(buffer)+1, 0);
-				if(strcmp(buffer, ":exit")==true){
-					close(clientSocket);
-					printf("[-]Disconnected from server.\n\r");
-					exit(1);
-				}
-				memset(buffer,0, sizeof(buffer));
+		if(intTyped==13){
+			send(clientSocket, buffer, strlen(buffer)+1, 0);
+			if(strcmp(buffer, ":exit")==true){
+				close(clientSocket);
+				printf("[-]Disconnected from server.\n\r");
+				exit(1);
+			}
+			memset(buffer,0, sizeof(buffer));
 				
-			}
-			else{
-				append(buffer,charTyped);
-			}
+		}
+		else if((intTyped==8 || intTyped==127) && sizeof(buffer)>0){
+			buffer[strlen(buffer)-1]='\0';
+		}else{
+			append(buffer,charTyped);
 		}
 	}
-	
-
 	return 0;
 }
 
@@ -116,4 +116,15 @@ void append(char* s, char c) {
         int len = strlen(s);
         s[len] = c;
         s[len+1] = '\0';
+}
+void *ServerThread_work(void *arguments){
+	char message[200]; 
+	while (1){
+		memset(message,'\0', sizeof(message));
+		if(recv(clientSocket, message, 200, 0) < 0){
+			printf("[-]Error in receiving data.\n\r");
+	 	}else{				
+			printf("%s\n\r", message);
+		}
+	}
 }

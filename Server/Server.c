@@ -27,9 +27,7 @@ int addUser(int newUserSocket, char newName[10], struct sockaddr_in newUserAddr)
 char * findName(int searchSocket);
 
 int main(){
-    
-
-	int sockfd, ret;
+    int sockfd, ret;
 	struct sockaddr_in serverAddr;
 
 	int newSocket;
@@ -135,7 +133,7 @@ int addUser(int newUserSocket, char newName[10], struct sockaddr_in newUserAddr)
 		ConnUsers[ConnUsersCount].Addr=newUserAddr;
 		strncpy(ConnUsers[ConnUsersCount].name,newName,10);
 		if(pthread_create(&ConnUsers[ConnUsersCount++].thread, NULL, perform_work, NULL)==0){
-			printf("[+] Thread created succesfully");
+			printf("[+] Thread created succesfully\n");
 		}
 		else{
 			printf("[-] Error in creating thread");
@@ -144,15 +142,3 @@ int addUser(int newUserSocket, char newName[10], struct sockaddr_in newUserAddr)
 	}
 	return 0;
 }
-
-/*char * findName(int searchSocket){
-	//printf("Dentro findName\n");
-	for(int n=0;n<=ConnUsersCount-1;n++){
-		if(ConnUsers[n].socket == searchSocket){
-			//printf("Trovato nome!\n");
-			return ConnUsers[n].name;
-		}
-	}
-	//printf("Nome non trovato!\n");
-	return NULL;
-}*/

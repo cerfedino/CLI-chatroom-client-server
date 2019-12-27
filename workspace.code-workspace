@@ -7,5 +7,9 @@
 			"path": "./Client"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"types.h": "c"
+		}
+	}
 }
