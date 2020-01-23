@@ -40,10 +40,10 @@ int main(){
 
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	if(sockfd < 0){
-		printf("[-]Error in connection.\n");
+		printf("[-] Error in connection.\n");
 		exit(1);
 	}
-	printf("[+]Server Socket is created.\n");
+	printf("[+] Server Socket is created.\n");
 
 	memset(&serverAddr, '\0', sizeof(serverAddr));
 	serverAddr.sin_family = AF_INET;
@@ -52,15 +52,15 @@ int main(){
 
 	ret = bind(sockfd, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
 	if(ret < 0){
-		printf("[-]Error in binding.\n");
+		printf("[-] Error in binding.\n");
 		exit(1);
 	}
-	printf("[+]Bind to port %d\n", 4444);
+	printf("[+] Bind to port %d\n", 4444);
 
 	if(listen(sockfd, 10) == 0){
-		printf("[+]Listening....\n");
+		printf("[+] Listening....\n");
 	}else{
-		printf("[-]Error in binding.\n");
+		printf("[-] Error in binding.\n");
 	}
 
 
@@ -99,8 +99,8 @@ void *perform_work(void *arguments){
 
 	char buffer[100]; //Where the received message will be stored
 	char message[200]; //Where the final message that will be sent is stored
+	
 	while(1){
-		
 		recv(user->socket, buffer, 100, 0);
 		if(strcmp(buffer, "")!=0){
 			if(strcmp(buffer, ":exit") == 0){
@@ -108,7 +108,7 @@ void *perform_work(void *arguments){
 				break;
 			}
 			else{
-				printf("Messaggio da [%s:%d (%s)] = '%s' - Faccio il broadcast...\n", address,port, name,buffer);
+				printf("Message from [%s:%d (%s)] = '%s' - Brodcasting...\n", address,port, name,buffer);
 				
 				snprintf(message,sizeof(message),"%s:%d (%s) : %s", address,port, name,buffer);
 
@@ -122,7 +122,7 @@ void *perform_work(void *arguments){
 
 void MessBroadcast(char * message){
 	for(int n=0;n<=ConnUsersCount-1;n++){
-		printf("Mando il messaggio a %s:%d '%s' socket(%d)\n", inet_ntoa(ConnUsers[n].Addr.sin_addr), ntohs(ConnUsers[n].Addr.sin_port), ConnUsers[n].name, ConnUsers[n].socket);
+		printf("Sending message to %s:%d '%s' socket(%d)\n", inet_ntoa(ConnUsers[n].Addr.sin_addr), ntohs(ConnUsers[n].Addr.sin_port), ConnUsers[n].name, ConnUsers[n].socket);
 		send(ConnUsers[n].socket, message, strlen(message)+1, 0);
 	}
 }

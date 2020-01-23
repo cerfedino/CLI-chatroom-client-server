@@ -9,7 +9,11 @@
 	],
 	"settings": {
 		"files.associations": {
-			"types.h": "c"
+			"types.h": "c",
+			"stdbool.h": "c",
+			"pthread.h": "c",
+			"inet.h": "c",
+			"curses.h": "c"
 		}
 	}
 }

@@ -30,7 +30,9 @@
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
-                "-lpthread"
+                "-lpthread",
+                "-lncurses",
+                "-lcurses"
             ],
             "options": {
                 "cwd": "/usr/bin"
