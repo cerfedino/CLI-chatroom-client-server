@@ -10,10 +10,10 @@
             "args": [
                 "clear",
                 "&&",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "./${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "/usr/bin"
+                "cwd": "${fileDirname}/"
             },
             "problemMatcher": [
                 "$gcc"
@@ -29,13 +29,14 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
+                "./${fileBasenameNoExtension}",
                 "-lpthread",
                 "-lncurses",
-                "-lcurses"
+                "-lcurses",
+                "-ljson-c"
             ],
             "options": {
-                "cwd": "/usr/bin"
+                "cwd": "${fileDirname}/"
             },
             "problemMatcher": [
                 "$gcc"

@@ -10,10 +10,10 @@
             "args": [
                 "clear",
                 "&&",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "./${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "/usr/bin"
+                "cwd": "${fileDirname}/"
             },
             "problemMatcher": [
                 "$gcc"
@@ -29,11 +29,11 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}",
+                "${fileBasenameNoExtension}",
                 "-lpthread"
             ],
             "options": {
-                "cwd": "/usr/bin"
+                "cwd": "${fileDirname}/"
             },
             "problemMatcher": [
                 "$gcc"

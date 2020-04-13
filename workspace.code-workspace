@@ -13,7 +13,13 @@
 			"stdbool.h": "c",
 			"pthread.h": "c",
 			"inet.h": "c",
-			"curses.h": "c"
+			"curses.h": "c",
+			"typeinfo": "c",
+			"select.h": "c",
+			"cstdio": "c",
+			"unistd.h": "c",
+			"in.h": "c",
+			"signal.h": "c"
 		}
 	}
 }

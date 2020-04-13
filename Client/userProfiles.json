@@ -1,0 +1,16 @@
+{
+    "userProfiles": [
+        {
+            "username" : "cerfe",
+            "password" : "ciaocomestai",
+            "savedServers" : [
+                {"serverCerfeda" :{
+                    "IP" : "cerfeda.com",
+                    "PORT" : "4444"
+                    }
+                }
+            ]
+            
+        }
+    ]
+}   
