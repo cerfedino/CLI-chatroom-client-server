@@ -11,7 +11,7 @@
 
 ///SET THESE ACCORDINGLY///
 #define SERVER_PORT 4444
-#define SERVER_IP "78.47.63.215"
+#define SERVER_IP "YOUR SERVER IP"
 
 
 //do NOT touch these

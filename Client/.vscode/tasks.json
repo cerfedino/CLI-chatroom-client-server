@@ -32,8 +32,7 @@
                 "./${fileBasenameNoExtension}",
                 "-lpthread",
                 "-lncurses",
-                "-lcurses",
-                "-ljson-c"
+                "-lcurses"
             ],
             "options": {
                 "cwd": "${fileDirname}/"
