@@ -5,3 +5,6 @@ Simple Linux IRC server &amp; client written in C. Allows multiple clients to co
   gcc -g Server.c -o Server -lpthread
 ### Client.c
   gcc -g Client.c -o Client -lpthread -lncurses -lcurses -ljson-c
+
+## Run
+Run Server first!
