@@ -1,4 +1,4 @@
-# IRC-client-server
+# CLI-chatroom-client-server
 Simple Linux IRC server &amp; client written in C. Allows multiple clients to connect to the server's chatroom and talk to each other
 ## Compile instructions
 ### Server.c
